@@ -54,4 +54,5 @@ $ healm install ziggy --set configmap.spaceoddity.value="-mem 300"
 ## See also
 
 [spaceboy on Dockerhub](https://hub.docker.com/r/de13/spaceboy/)
+
 [spaceoddity on Dockerhub](https://hub.docker.com/r/de13/spaceoddity/)
