@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "ziggy.fullname" . }}
+  labels:
+    app: {{ include "ziggy.name" . }}
+    chart: {{ include "ziggy.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "ziggy.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "ziggy.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Values.image.spaceboy.name }}
+          image: "{{ .Values.image.spaceboy.repository }}:{{ .Values.image.spaceboy.tag }}"
+          imagePullPolicy: {{ .Values.image.spaceboy.pullPolicy }}
+          command: ["./goapp"]
+          args: ["$(ARGS)"]
+          env:
+            - name: ARGS
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "ziggy.fullname" . }}
+                  key: {{ .Values.configmap.spaceboy.key }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: http
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+        - name: {{ .Values.image.spaceoddity.name }}
+          image: "{{ .Values.image.spaceoddity.repository }}:{{ .Values.image.spaceoddity.tag }}"
+          imagePullPolicy: {{ .Values.image.spaceoddity.pullPolicy }}
+          command: ["./goapp"]
+          args: ["$(ARGS)"]
+          env:
+            - name: ARGS
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "ziggy.fullname" . }}
+                  key: {{ .Values.configmap.spaceoddity.key }}
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}

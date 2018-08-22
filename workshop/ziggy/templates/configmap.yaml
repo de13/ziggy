@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "ziggy.fullname" . }}
+  labels:
+  app: {{ include "ziggy.name" . }}
+  chart: {{ include "ziggy.chart" . }}
+  release: {{ .Release.Name }}
+  heritage: {{ .Release.Service }}
+data:
+  "{{ .Values.configmap.spaceboy.key }}": "{{ .Values.configmap.spaceboy.value }}"
+  "{{ .Values.configmap.spaceoddity.key }}": "{{ .Values.configmap.spaceoddity.value }}"
