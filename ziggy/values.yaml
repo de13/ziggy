@@ -25,10 +25,10 @@ configmap:
   spaceboy:
     key: spaceboy-args
     value: ["-healthz 300"]
-  # args for spaceoddity container, eg "-cpu 300", "-mem"
+  # args for spaceoddity container, eg "-cpu -s 300", "-mem"
   spaceoddity:
     key: spaceoddity-args
-    value: ["-cpu 0"]
+    value: ["-cpu -s 0"]
 
 service:
   type: ClusterIP
