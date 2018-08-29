@@ -2,21 +2,21 @@ apiVersion: v1
 entries:
   ziggy:
   - apiVersion: v1
-    appVersion: "1.0"
-    created: 2018-08-28T21:01:45.187071249+02:00
+    appVersion: 0.2.0
+    created: 2018-08-29T06:59:56.882495087+02:00
     description: A Helm chart for Kubernetes
-    digest: 8b001b74fd4ea60a2f335d6689ca3fb9e36aceba8af5fc4b752fbdf5a1b95f21
+    digest: 29e2047ec3f904b5b20dc331f292d77d24f45ac8df7322531c82243ce847a5aa
     name: ziggy
     urls:
     - ziggy-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2018-08-28T21:01:45.186700411+02:00
+    created: 2018-08-29T06:59:56.882122251+02:00
     description: A Helm chart for Kubernetes
     digest: d68dd4493c02d29b88aaadbb5c6047bbc41726317ec31acc9e404101a7fd9134
     name: ziggy
     urls:
     - ziggy-0.1.0.tgz
     version: 0.1.0
-generated: 2018-08-28T21:01:45.186182417+02:00
+generated: 2018-08-29T06:59:56.881598948+02:00
